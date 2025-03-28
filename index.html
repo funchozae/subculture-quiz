@@ -114,14 +114,39 @@ h1.mini {
 .result {
   display: none;
   margin-top: 20px;
+  padding: 20px;
   animation: fadeIn 1.2s ease forwards;
+  font-size: 14px;
+  line-height: 1.8;
+  white-space: normal;
+  word-wrap: break-word;
+  text-align: center;
 }
 
 .result img {
   width: 100%;
   max-width: 700px;
+  margin: 0 auto 20px;
   border-radius: 12px;
-  margin-bottom: 20px;
+  box-shadow: 0 0 10px #0ff;
+  display: block;
+}
+
+.result-title {
+  font-size: 18px;
+  font-family: 'Press Start 2P', cursive;
+  color: #f0f;
+  margin-bottom: 10px;
+  text-shadow: 0 0 5px #0ff;
+}
+
+.result-description {
+  font-family: 'VT323', monospace;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #0ff;
+  text-align: left;
 }
 
 .start-btn, .next-btn {
@@ -296,19 +321,23 @@ h1.mini {
     ];
     
     const results = [
-      {
-        img: 'result1.png',
-        text: '📱 Ты потребитель визуала / наблюдатель...'
-      },
-      {
-        img: 'result2.png',
-        text: '🔘 Ты — вне ярлыков...'
-      },
-      {
-        img: 'result3.png',
-        text: '🔥 Ты действительно в субкультуре...'
-      }
-    ];
+  {
+    img: 'result1.png',
+    title: '📱 Ты потребитель визуала / наблюдатель',
+    description: 'Ты интересуешься стилем, формой, атмосферой, но не включён(а) в глубину. Возможно, тебе просто комфортно использовать образы, не связывая их с реальным сообществом или ценностями. Это нормально — ты выбираешь то, что тебе нравится.'
+  },
+  {
+    img: 'result2.png',
+    title: '🔘 Ты — вне ярлыков',
+    description: 'Ты знаешь, что существует субкультурный мир, и тебе он интересен. Но ты не вписан(а) в него — не потому что не подходишь, а потому что не нуждаешься в названии. У тебя есть своя позиция, и она вне шаблонов.'
+  },
+  {
+    img: 'result3.png',
+    title: '🔥 Ты действительно в субкультуре',
+    description: 'Ты не просто знаешь, как выглядеть — ты знаешь, почему. Ты понимаешь, кто ты, чем отличаешься от остального мира, и с кем тебе по пути. У тебя есть своя среда, взгляды, история и ощущение принадлежности. Это больше, чем стиль — это внутренняя позиция.'
+  }
+];
+
     
     let current = 0;
     let answers = [];
@@ -354,19 +383,23 @@ h1.mini {
     }
     
     function showResult() {
-      document.getElementById('question').style.display = 'none';
-      document.getElementById('options').style.display = 'none';
-      document.getElementById('nextBtn').style.display = 'none';
-      document.getElementById('progress').style.width = '100%';
-    
-      const counts = [0, 0, 0]; // [наблюдатель, вне ярлыков, субкультура]
-      answers.forEach(i => counts[i]++);
-      const max = counts.indexOf(Math.max(...counts));
-      const res = results[max];
-    
-      document.getElementById('result').style.display = 'block';
-      document.getElementById('result').innerHTML = `<img src="${res.img}" /><p>${res.text}</p>`;
-    }
+  document.getElementById('question').style.display = 'none';
+  document.getElementById('options').style.display = 'none';
+  document.getElementById('nextBtn').style.display = 'none';
+  document.getElementById('progress').style.width = '100%';
+
+  const counts = [0, 0, 0];
+  answers.forEach(i => counts[i]++);
+  const max = counts.indexOf(Math.max(...counts));
+  const res = results[max];
+
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('result').innerHTML = `
+    <img src="${res.img}" />
+    <div class="result-title">${res.title}</div>
+    <div class="result-description">${res.description}</div>
+  `;
+}
     </script>
     
 </body>
